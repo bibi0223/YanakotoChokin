@@ -11,16 +11,16 @@ final class UserStats {
         self.currentPoints = currentPoints
     }
 
-    private let maxSafePoints = Int.max - 1_000_000 // オーバーフロー防止のマージン
+    private static let maxSafePoints = Int.max - 1_000_000 // オーバーフロー防止のマージン
 
     func addPoints(_ points: Int) {
         // 負数・ゼロは無視
         guard points > 0 else { return }
         // オーバーフロー防止
-        if totalPoints <= maxSafePoints {
+        if totalPoints <= Self.maxSafePoints {
             totalPoints += points
         }
-        if currentPoints <= maxSafePoints {
+        if currentPoints <= Self.maxSafePoints {
             currentPoints += points
         }
     }
